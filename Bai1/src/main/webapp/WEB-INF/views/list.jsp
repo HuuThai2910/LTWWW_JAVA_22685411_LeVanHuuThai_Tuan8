@@ -81,15 +81,34 @@
         .top-bar a:hover, .top-bar button:hover {
             opacity: 0.85;
         }
+
+        .action-buttons form {
+            display: inline;
+        }
+
+        .delete-link {
+            background: none;
+            border: none;
+            color: #007bff;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .delete-link:hover {
+            text-decoration: underline;
+        }
+
     </style>
 
 </head>
 <body>
 <h2>EMPLOYEE LIST</h2>
 <div class="top-bar">
-    <input type="text" placeholder="Search" />
+    <input type="text" placeholder="Search"/>
     <button>Search</button>
-    <a href="register">Add Employee</a>
+    <a href="/employees/add">Add Employee</a>
 </div>
 <table border="1">
     <tr>
@@ -105,14 +124,15 @@
         <tr>
             <td>${emp.firstName}</td>
             <td>${emp.lastName}</td>
-            <td>${emp.gender}</td>
+            <td>${emp.gender.toString()}</td>
             <td>${emp.dob}</td>
             <td>${emp.email}</td>
             <td>${emp.phone}</td>
-            <td>
-                <a href="edit/${emp.id}">Update</a> |
-                <a href="delete/${emp.id}">Delete</a>
-
+            <td class="action-buttons">
+                <a href="/employees/update/${emp.id}">Update</a> |
+                <form:form method="post" action="/employees/delete/${emp.id}" >
+                    <button type="submit" class="delete-link">Delete</button>
+                </form:form>
             </td>
         </tr>
     </c:forEach>
